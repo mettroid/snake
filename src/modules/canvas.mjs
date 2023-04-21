@@ -12,6 +12,7 @@ class Canvas {
         
         canvas.style.background = 'pink';  
         this.parent.insertAdjacentElement('afterBegin', canvas);
+        this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
     }
 
