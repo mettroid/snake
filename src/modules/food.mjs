@@ -6,10 +6,10 @@ class Food {
         this.h = h;
         this.color = color;
     }
-    draw(canvasOpt){
-        canvasOpt.ctx.fillStyle = this.color;
-        canvasOpt.ctx.rect(this.x, this.y, this.w, this.h);
-        canvasOpt.ctx.fill();
+    draw(ctx){
+        ctx.fillStyle = this.color;
+        ctx.rect(this.x, this.y, this.w, this.h);
+        ctx.fill();
     }
 }
 export {Food}
