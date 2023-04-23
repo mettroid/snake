@@ -5,15 +5,19 @@ class Canvas {
         this.ctx = null;
     }
     create(){
-        let canvas = document.createElement('canvas');
-        canvas.width = this.parent.offsetWidth-2;
-        canvas.height = this.parent.offsetHeight-2;
-        canvas.id = this.id;
-        
-        canvas.style.background = 'pink';  
-        this.parent.insertAdjacentElement('afterBegin', canvas);
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
+        if(this.ctx !== null){
+            console.log('canvas already created');
+            return;
+        } else {
+            this.canvas = document.createElement('canvas');
+            this.canvas.width = this.parent.offsetWidth-2;
+            this.canvas.height = this.parent.offsetHeight-2;
+            this.canvas.id = this.id;
+            this.canvas.style.background = 'pink';  
+            
+            this.parent.insertAdjacentElement('afterBegin', this.canvas);
+            this.ctx = this.canvas.getContext('2d');
+        }
     }
 
 }
