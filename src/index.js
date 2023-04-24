@@ -57,7 +57,6 @@ async function game(e){
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
         requestAnimationFrame(function game(time){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
-            c_1.ctx.fillStyle = 'pink';
             food.draw(c_1.ctx);
             snake.draw(c_1.ctx, c_1.canvas);
     
