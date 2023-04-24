@@ -10,6 +10,7 @@ class Snake {
         this.y = y;
         this.w = w;
         this.h = h;
+        this.cell = w;
         this.color = color;
     }
     draw(ctx, canvas){
@@ -22,9 +23,8 @@ class Snake {
 
         ctx.fillStyle = this.color;
         ctx.beginPath(); //head
-        let head = new Path2D();
-        head.arc(this.x, this.y, this.w, 0, Math.PI*2);
-        ctx.fill(head);
+        ctx.rect(this.x * this.cell, this.y * this.cell, this.w, this.h);
+        ctx.fill();
     }
 
 }

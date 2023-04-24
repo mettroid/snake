@@ -9,6 +9,8 @@ let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
 
 let food, snake;
+let cells = 30;
+let cellsSize = 20;
 
 window.onload = function(){
     console.log('onload');
@@ -51,10 +53,11 @@ async function game(e){
     if(isPointInPath){
         let {Food} = await import('./modules/food.mjs'); // загрузим класс для еды
         let {Snake} = await import('./modules/snake.mjs');
-        food = new Food(100,100,20,20,'lime');
-        snake = new Snake(400,400,13,50,'red');
+        food = new Food(15, 15, cellsSize, cellsSize, 'lime');
+        snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
         requestAnimationFrame(function game(time){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
+            c_1.ctx.fillStyle = 'pink';
             food.draw(c_1.ctx);
             snake.draw(c_1.ctx, c_1.canvas);
     
