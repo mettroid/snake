@@ -7,17 +7,25 @@ class Snake extends Sprite{
     dx = 1;
     dy = 1;
     draw(ctx, canvas){
-        if(this.leftPressed && this.x - this.w/2 > 0){
-            this.x -= 1;
-        }
-        if(this.rightPressed && this.x + this.w/2 < canvas.width){
-            this.x += 1;
-        }
-
+        this.checkKey();
         ctx.fillStyle = this.color;
         ctx.beginPath(); //head
         ctx.rect(this.x * this.cell, this.y * this.cell, this.w, this.h);
         ctx.fill();
+    }
+    checkKey(){
+        if(this.rightPressed && this.x < 29){
+            this.x += 1;
+        }
+        if(this.leftPressed && this.x > 0){
+            this.x -= 1;
+        }
+        if(this.upPressed && this.y > 0){
+            this.y -= 1;
+        }
+        if(this.downPressed && this.y < 29){
+            this.y += 1;
+        }
     }
 
 }
