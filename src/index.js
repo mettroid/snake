@@ -1,6 +1,6 @@
 import "./index.html";
 import "./index.scss";
-import picPath from "./images/back.png";
+import background from "./images/back.png";
 import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 import {pathObj} from './modules/globalPath.mjs';
@@ -9,8 +9,11 @@ let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
 
 let food, snake;
+
 let cells = 30;
 let cellsSize = 20;
+
+let timer = null;
 
 window.onload = function(){
     console.log('onload');
@@ -29,6 +32,8 @@ function keyDownHandler(e){
         break;
         case "ArrowDown":
             snake.downPressed = true;
+            
+            console.log('!');
         break;
     }
 }
@@ -55,20 +60,18 @@ async function game(e){
         let {Snake} = await import('./modules/snake.mjs');
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
-        requestAnimationFrame(function game(time){
+        timer = window.setInterval(function(){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
             food.draw(c_1.ctx);
             snake.draw(c_1.ctx, c_1.canvas);
-    
-            requestAnimationFrame(game);
-        });
+        }, 100);
     }
 }
 
 async function start(){
     
     try{
-        let img = await Loader.loadImage(picPath);
+        let img = await Loader.loadImage(background);
         let ScrSaver = await import('./modules/screensaver.mjs');
             ScrSaver.draw(c_1, img); // начинаем отрисовку фона
         c_1.canvas.addEventListener('click', game);
@@ -81,6 +84,3 @@ async function start(){
 function dirrect(e){
     console.log('e.code');
 }
-c_1.canvas.addEventListener('keypress', function(e){
-    console.log(e);
-});
