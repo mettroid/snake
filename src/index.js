@@ -63,7 +63,7 @@ async function game(e){
         timer = window.setInterval(function(){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
             food.draw(c_1.ctx);
-            snake.draw(c_1.ctx, c_1.canvas);
+            snake.draw(c_1.ctx, food);
         }, 100);
     }
 }

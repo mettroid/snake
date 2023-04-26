@@ -6,7 +6,7 @@ class Snake extends Sprite{
     upPressed = false;
     trail = [];
     tail = 3;
-    draw(ctx, canvas){
+    draw(ctx, food){
         this.checkKey();
         ctx.fillStyle = this.color;
         ctx.beginPath(); //head
@@ -14,9 +14,10 @@ class Snake extends Sprite{
             ctx.rect(this.trail[i].x * this.cell, this.trail[i].y * this.cell, this.w, this.h);
         }
         this.trail.push({x: this.x, y: this.y});
-        if(this.trail.length > 3){
+        if(this.trail.length > this.tail){
             this.trail.shift();
         }
+        this.eat(food);
         ctx.fill();
     }
     checkKey(){
@@ -29,6 +30,17 @@ class Snake extends Sprite{
         }else if(this.downPressed && this.y < 29){
             this.y += 1;
         }
+    }
+    eat(food){
+        if(this.trail[this.trail.length - 1].x === food.x &&
+           this.trail[this.trail.length - 1].y === food.y){
+              food.x = this.random(1, 30);
+              food.y = this.random(1, 30);
+              this.addTail();
+            }
+    }
+    addTail(){
+        this.tail++;
     }
 
 }
