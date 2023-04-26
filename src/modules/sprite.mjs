@@ -6,6 +6,9 @@ class Sprite {
         this.h = h;
         this.cell = w;
         this.color = color;
-    }     
+    }   
+    random(min, max){
+        return Math.floor(Math.random() * (max - min)) + min;
+    }  
 }
 export {Sprite}
