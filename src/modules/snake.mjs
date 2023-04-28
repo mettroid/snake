@@ -33,8 +33,7 @@ class Snake extends Sprite{
         }
     }
     eat(food){
-        if(this.trail[this.trail.length - 1].x === food.x &&
-           this.trail[this.trail.length - 1].y === food.y){
+        if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
               this.addTail();
