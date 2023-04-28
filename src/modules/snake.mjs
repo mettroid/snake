@@ -1,4 +1,5 @@
 import {Sprite} from './sprite.mjs';
+import {isEqual} from 'lodash';
 class Snake extends Sprite{
     leftPressed = false;
     rightPressed = false;
