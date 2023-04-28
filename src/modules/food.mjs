@@ -7,5 +7,8 @@ class Food extends Sprite{
         ctx.fill();
 
     }
+    getPosition(){
+        return {x: this.x, y: this.y}
+    }
 }
 export {Food}
