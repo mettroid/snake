@@ -20,6 +20,7 @@ class Snake extends Sprite{
         }
         this.eat(food);
         ctx.fill();
+        ctx.stroke();
     }
     checkKey(){
         if(this.rightPressed && this.x < 29){
@@ -34,6 +35,10 @@ class Snake extends Sprite{
     }
     eat(food){
         if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
+              let result = document.getElementById('result');
+              result.innerHTML = Number(result.innerHTML) + 1;
+              console.log(result.innerHTML);
+
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
               this.addTail();
