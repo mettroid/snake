@@ -44,6 +44,13 @@ class Snake extends Sprite{
               this.addTail();
             }
     }
+    clearPressed(){
+        this.leftPressed = false;
+        this.rightPressed = false;
+        this.downPressed = false;
+        this.upPressed = false;
+        return true;
+    }
     addTail(){
         this.tail++;
     }
