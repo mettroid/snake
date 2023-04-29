@@ -4,6 +4,7 @@ import background from "./images/back.png";
 import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 import {pathObj} from './modules/globalPath.mjs';
+import * as GameOver from './modules/gameOver.mjs';
 
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
@@ -32,27 +33,9 @@ function keyDownHandler(e){
         break;
         case "ArrowDown":
             snake.upPressed || snake.clearPressed() && (snake.downPressed = true);
-            
-            console.log('!');
         break;
     }
 }
-/*function keyUpHandler(e){
-    switch(e.code){
-        case "ArrowLeft":
-            snake.leftPressed = false;
-        break;
-        case "ArrowRight":
-            snake.rightPressed = false;
-        break;
-        case "ArrowUp":
-            snake.upPressed = false;
-        break;
-        case "ArrowDown":
-            snake.downPressed = false;
-        break;
-    }
-}*/
 async function game(e){
     let isPointInPath = c_1.ctx.isPointInPath(pathObj[0], e.offsetX, e.offsetY);
     if(isPointInPath){
@@ -64,6 +47,11 @@ async function game(e){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
             food.draw(c_1.ctx);
             snake.draw(c_1.ctx, food);
+
+            if(snake.checkCrashWall()){
+                window.clearInterval(timer);
+                GameOver.draw(c_1);
+            }
         }, 100);
     }
 }
@@ -76,7 +64,6 @@ async function start(){
             ScrSaver.draw(c_1, img); // начинаем отрисовку фона
         c_1.canvas.addEventListener('click', game);
         document.addEventListener('keydown', keyDownHandler);
-        //document.addEventListener('keyup', keyUpHandler);
     } catch (err){
         alert(err.message);
     }
