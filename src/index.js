@@ -22,22 +22,22 @@ window.onload = function(){
 function keyDownHandler(e){
     switch(e.code){
         case "ArrowLeft":
-            snake.leftPressed = true;
+            snake.rightPressed || snake.clearPressed() && (snake.leftPressed = true);
         break;
         case "ArrowRight":
-            snake.rightPressed = true;
+            snake.leftPressed || snake.clearPressed() && (snake.rightPressed = true);
         break;
         case "ArrowUp":
-            snake.upPressed = true;
+            snake.downPressed || snake.clearPressed() && (snake.upPressed = true);
         break;
         case "ArrowDown":
-            snake.downPressed = true;
+            snake.upPressed || snake.clearPressed() && (snake.downPressed = true);
             
             console.log('!');
         break;
     }
 }
-function keyUpHandler(e){
+/*function keyUpHandler(e){
     switch(e.code){
         case "ArrowLeft":
             snake.leftPressed = false;
@@ -52,7 +52,7 @@ function keyUpHandler(e){
             snake.downPressed = false;
         break;
     }
-}
+}*/
 async function game(e){
     let isPointInPath = c_1.ctx.isPointInPath(pathObj[0], e.offsetX, e.offsetY);
     if(isPointInPath){
@@ -76,7 +76,7 @@ async function start(){
             ScrSaver.draw(c_1, img); // начинаем отрисовку фона
         c_1.canvas.addEventListener('click', game);
         document.addEventListener('keydown', keyDownHandler);
-        document.addEventListener('keyup', keyUpHandler);
+        //document.addEventListener('keyup', keyUpHandler);
     } catch (err){
         alert(err.message);
     }
