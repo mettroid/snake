@@ -39,6 +39,7 @@ function keyDownHandler(e){
 async function game(e){
     let isPointInPath = c_1.ctx.isPointInPath(pathObj[0], e.offsetX, e.offsetY);
     if(isPointInPath){
+        delete pathObj[0];
         let {Food} = await import('./modules/food.mjs'); // загрузим класс для еды
         let {Snake} = await import('./modules/snake.mjs');
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
