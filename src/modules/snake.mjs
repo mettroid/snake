@@ -18,8 +18,7 @@ class Snake extends Sprite{
         for(let i = 0; i < this.trail.length; i++){
             ctx.rect(this.trail[i].x * this.cell, this.trail[i].y * this.cell, this.w, this.h);
             if(this.#checkCrashSelf(i, this.trail.length - 1)){
-                this.trail.splice(0, this.trail.length - 3);
-                this.tail = 3;
+                this.#cutTail();
                 break;
             }
         }
@@ -58,7 +57,7 @@ class Snake extends Sprite{
 
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
-              this.addTail();
+              this.#addTail();
             }
     }
     clearPressed(){
@@ -68,10 +67,11 @@ class Snake extends Sprite{
         this.upPressed = false;
         return true;
     }
-    crash(){
-
+    #cutTail(){
+        this.trail.splice(0, this.trail.length - 3);
+        this.tail = 3;
     }
-    addTail(){
+    #addTail(){
         this.tail++;
     }
 
