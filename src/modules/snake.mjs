@@ -38,10 +38,7 @@ class Snake extends Sprite{
         }
     }
     #checkCrashSelf(pos, len){
-                if(pos == len) return false;
-                if(isEqual(this.trail[pos], this.trail[len])){
-                    return true;
-                }
+              return isEqual(this.trail[pos], this.trail[len]) && pos !== len;
     }
     checkKey(){
         if(this.rightPressed){

@@ -5,6 +5,7 @@ import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 import {pathObj} from './modules/globalPath.mjs';
 import * as GameOver from './modules/gameOver.mjs';
+import * as Animation from './modules/animation.mjs';
 
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
@@ -44,12 +45,13 @@ async function game(e){
         let {Snake} = await import('./modules/snake.mjs');
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
+
         timer = window.setInterval(function(){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
             food.draw(c_1.ctx);
             snake.draw(c_1.ctx, food);
 
-            if(snake.checkCrashWall()){
+            if(snake.checkCrashWall()){  // если столкнулись со стеной
                 window.clearInterval(timer);
                 GameOver.draw(c_1);
             }
