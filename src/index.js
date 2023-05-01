@@ -5,7 +5,6 @@ import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 import {pathObj} from './modules/globalPath.mjs';
 import * as GameOver from './modules/gameOver.mjs';
-import * as Animation from './modules/animation.mjs';
 
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
@@ -38,6 +37,7 @@ function keyDownHandler(e){
     }
 }
 async function game(e){
+    if(!pathObj[0]) return;
     let isPointInPath = c_1.ctx.isPointInPath(pathObj[0], e.offsetX, e.offsetY);
     if(isPointInPath){
         delete pathObj[0];

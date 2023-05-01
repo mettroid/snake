@@ -14,7 +14,7 @@ class Snake extends Sprite{
             this.trail.shift();
         }
         ctx.fillStyle = this.color;
-        ctx.beginPath(); //head
+        ctx.beginPath();
         for(let i = 0; i < this.trail.length; i++){
             ctx.rect(this.trail[i].x * this.cell, this.trail[i].y * this.cell, this.w, this.h);
             if(this.#checkCrashSelf(i, this.trail.length - 1)){
@@ -23,7 +23,7 @@ class Snake extends Sprite{
             }
         }
 
-        this.eat(food);
+        this.eat(ctx, food);
         ctx.fill();
         ctx.stroke();
     }
@@ -50,7 +50,7 @@ class Snake extends Sprite{
             this.y += 1;
         }
     }
-    eat(food){
+    eat(ctx, food){
         if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
               let result = document.getElementById('result');
               result.innerHTML = Number(result.innerHTML) + 1;
