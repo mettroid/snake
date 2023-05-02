@@ -54,6 +54,9 @@ async function game(e){
             if(snake.checkCrashWall()){  // если столкнулись со стеной
                 window.clearInterval(timer);
                 GameOver.draw(c_1);
+                setTimeout(function(){
+                    document.location.reload();
+                }, 2000);
             }
         }, 100);
     }
