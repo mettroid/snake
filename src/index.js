@@ -5,6 +5,7 @@ import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 import {pathObj} from './modules/globalPath.mjs';
 import * as GameOver from './modules/gameOver.mjs';
+import * as Winner from './modules/winner.mjs';
 
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
@@ -54,6 +55,13 @@ async function game(e){
             if(snake.checkCrashWall()){  // если столкнулись со стеной
                 window.clearInterval(timer);
                 GameOver.draw(c_1);
+                setTimeout(function(){
+                    document.location.reload();
+                }, 2000);
+            }
+            if(Winner.isWin(snake)){
+                clearInterval(timer);
+                Winner.draw(c_1, snake.score);
                 setTimeout(function(){
                     document.location.reload();
                 }, 2000);

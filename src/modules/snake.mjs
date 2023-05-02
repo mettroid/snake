@@ -7,6 +7,7 @@ class Snake extends Sprite{
     upPressed = false;
     trail = [];
     tail = 3;
+    score = 0;
     draw(ctx, food){
         this.checkKey();
         this.trail.push({x: this.x, y: this.y});
@@ -52,8 +53,9 @@ class Snake extends Sprite{
     }
     eat(ctx, food){
         if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
+              
               let result = document.getElementById('result');
-              result.innerHTML = Number(result.innerHTML) + 1;
+              result.innerHTML = ++this.score;
 
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
