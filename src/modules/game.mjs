@@ -33,7 +33,7 @@ class Gamer {
         c_1.ctx.fillText(`score: ${this.score}`, x, y);
     }
     isWin(){
-        return this.score == 3;
+        return this.score == 6;
     }
     screenSaver(c_1, img){
         let x = Math.ceil(c_1.canvas.width / 2);

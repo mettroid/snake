@@ -1,2 +1,0 @@
-let pathObj = {};
-export {pathObj}

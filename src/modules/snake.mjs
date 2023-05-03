@@ -30,10 +30,10 @@ class Snake extends Sprite{
     }
     checkCrashWall(){
         let head = this.trail[this.trail.length-1];
-        if(head.x < 0 || 
-           head.x > 29 ||
-           head.y < 0 ||
-           head.y > 29){ 
+        if(head.x < 1 || 
+           head.x > 28 ||
+           head.y < 1 ||
+           head.y > 28){ 
                 return true;
         }
     }
@@ -64,10 +64,11 @@ class Snake extends Sprite{
     }
     setStratPosition(){
         this.x = 20;
-        this.y = 20; 
+        this.y = 20;
+        this.trail.length = 0; 
         this.clearPressed();
         this.upPressed = true;
-        this.#cutTail();
+        this.tail = 3;
     }
     clearPressed(){
         this.leftPressed = false;
