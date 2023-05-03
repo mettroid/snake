@@ -10,6 +10,7 @@ import * as Winner from './modules/winner.mjs';
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
 
+let start = false;
 let food, snake;
 
 let cells = 30;
@@ -19,9 +20,10 @@ let timer = null;
 
 window.onload = function(){
     console.log('onload');
-    start();
+    init();
 }
 function keyDownHandler(e){
+    if(!start) return;
     switch(e.code){
         case "ArrowLeft":
             snake.rightPressed || snake.clearPressed() && (snake.leftPressed = true);
@@ -41,6 +43,7 @@ async function game(e){
     if(!pathObj[0]) return;
     let isPointInPath = c_1.ctx.isPointInPath(pathObj[0], e.offsetX, e.offsetY);
     if(isPointInPath){
+        start = true; 
         delete pathObj[0];
         let {Food} = await import('./modules/food.mjs'); // загрузим класс для еды
         let {Snake} = await import('./modules/snake.mjs');
@@ -70,7 +73,7 @@ async function game(e){
     }
 }
 
-async function start(){
+async function init(){
     
     try{
         let img = await Loader.loadImage(background);
