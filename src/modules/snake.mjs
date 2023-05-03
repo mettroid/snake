@@ -7,8 +7,7 @@ class Snake extends Sprite{
     upPressed = false;
     trail = [];
     tail = 3;
-    score = 0;
-    draw(ctx, food){
+    draw(ctx, food, gamer){
         this.checkKey();
         this.trail.push({x: this.x, y: this.y});
         if(this.trail.length > this.tail){
@@ -18,27 +17,30 @@ class Snake extends Sprite{
         ctx.beginPath();
         for(let i = 0; i < this.trail.length; i++){
             ctx.rect(this.trail[i].x * this.cell, this.trail[i].y * this.cell, this.w, this.h);
+            if(this.trail.length < 2) continue; // если у нас пока одна голова , то уходим , не счем её сравнивать
             if(this.#checkCrashSelf(i, this.trail.length - 1)){
                 this.#cutTail();
-                break;
+                gamer.lives--;
+                console.log(gamer.lives);
             }
         }
-
-        this.eat(ctx, food);
+        this.eat(ctx, food, gamer);
         ctx.fill();
         ctx.stroke();
     }
     checkCrashWall(){
-        let endObj = this.trail[this.trail.length-1];
-        if(endObj.x < 0 || 
-           endObj.x > 29 ||
-           endObj.y < 0 ||
-           endObj.y > 29){ 
+        let head = this.trail[this.trail.length-1];
+        if(head.x < 0 || 
+           head.x > 29 ||
+           head.y < 0 ||
+           head.y > 29){ 
                 return true;
         }
     }
-    #checkCrashSelf(pos, len){
-              return isEqual(this.trail[pos], this.trail[len]) && pos !== len;
+    #checkCrashSelf(bodyPos, headPos){
+              if(isEqual(this.trail[headPos], this.trail[headPos - 1])) return false; // если координаты головы идентичны координатам шеи змеи
+              if(isEqual(this.trail[bodyPos], this.trail[headPos]) && bodyPos !== headPos) return true; // если координаты головы равны координатам любой части тела, кроме самой себя 
+              
     }
     checkKey(){
         if(this.rightPressed){
@@ -51,16 +53,21 @@ class Snake extends Sprite{
             this.y += 1;
         }
     }
-    eat(ctx, food){
+    eat(ctx, food, gamer){
         if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
               
-              let result = document.getElementById('result');
-              result.innerHTML = ++this.score;
-
+              gamer.score++;
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
               this.#addTail();
             }
+    }
+    setStratPosition(){
+        this.x = 20;
+        this.y = 20; 
+        this.clearPressed();
+        this.upPressed = true;
+        this.#cutTail();
     }
     clearPressed(){
         this.leftPressed = false;
