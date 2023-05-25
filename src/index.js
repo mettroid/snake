@@ -4,6 +4,7 @@ import background from "./images/back.png";
 import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 
+let result = document.getElementById('result');
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
 
@@ -47,7 +48,7 @@ async function game(e){
         timer = window.setInterval(function(){
             c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
             food.draw(c_1.ctx);
-            snake.draw(c_1.ctx, food, gamer);
+            snake.draw(c_1.ctx, food, gamer, result);
 
             if(snake.checkCrashWall()){  // если столкнулись со стеной
                 gamer.lives--;

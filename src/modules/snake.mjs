@@ -7,7 +7,7 @@ class Snake extends Sprite{
     upPressed = false;
     trail = [];
     tail = 3;
-    draw(ctx, food, gamer){
+    draw(ctx, food, gamer, result){
         this.checkKey();
         this.trail.push({x: this.x, y: this.y});
         if(this.trail.length > this.tail){
@@ -24,7 +24,7 @@ class Snake extends Sprite{
                 console.log(gamer.lives);
             }
         }
-        this.eat(ctx, food, gamer);
+        this.eat(ctx, food, gamer, result);
         ctx.fill();
         ctx.stroke();
     }
@@ -53,10 +53,11 @@ class Snake extends Sprite{
             this.y += 1;
         }
     }
-    eat(ctx, food, gamer){
+    eat(ctx, food, gamer, result){
         if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
               
-              gamer.score++;
+            
+              result.innerHTML = ++gamer.score;
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
               this.#addTail();
