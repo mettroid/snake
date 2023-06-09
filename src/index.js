@@ -38,31 +38,36 @@ function render(){
 }
 function startGame(){
             let phase;
-            function game_loop(){
-                c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);      
-                
+            let deltaTime = 0;
+            let lastUpdate = performance.now();
+            function game_loop(currentTime){
+                    requestAnimationFrame(game_loop);
+                    deltaTime = currentTime - lastUpdate;
+                    if(deltaTime < 100) return;
+
+                    c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
                     phase = game.phase;
                     switch(phase){
                         case 'screen_saver': 
                             game[phase](c_1);
                         break;
                         case 'game':
-                                if(game.endgame) break;
-                                getTempPosition();
-                                detection();
-                                render();
-                                if(game.isWin()){
-                                    setTimeout(()=>{
-                                        game.phase = 'winner';
-                                        game.endgame = true;
-                                    }, 500);
-                                }
-                                if(game.isLoser()){
-                                    setTimeout(()=>{
-                                        game.phase = 'game_over';
-                                        game.endgame = true;
-                                    }, 500);
-                                }
+                            if(game.endgame) break;
+                            getTempPosition();
+                            detection();
+                            render();
+                            if(game.isWin()){
+                                setTimeout(()=>{
+                                    game.phase = 'winner';
+                                    game.endgame = true;
+                                }, 500);
+                            }
+                            if(game.isLoser()){
+                                setTimeout(()=>{
+                                    game.phase = 'game_over';
+                                    game.endgame = true;
+                                }, 500);
+                            }
                         break;
                         case 'winner':
                             game[phase](c_1);    
@@ -71,7 +76,7 @@ function startGame(){
                             game[phase](c_1);
                         break;
                     }
-                    setTimeout(game_loop, 200);
+                    lastUpdate = currentTime;
             }
             
             game_loop();

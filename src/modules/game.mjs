@@ -2,7 +2,7 @@ class Game {
     start = false;
     endGame = false;
     score = 0;
-    pathButton;
+    pathButton = null;
     phase;
     constructor(lives, phase, background){
         this.lives = lives;
@@ -26,7 +26,9 @@ class Game {
         c_1.ctx.font = '50px Serif';
         c_1.ctx.fillText('START', x, y);
     
-        this.pathButton = path;
+        if(!this.pathButton){
+            this.pathButton = path;
+        }
     }    
     game_over(c_1){
         let x = Math.floor(c_1.canvas.width / 2);
