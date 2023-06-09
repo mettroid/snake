@@ -12,7 +12,6 @@ class EventsMenu {
         if(this.isPointInPath(e)){
             this.game.start = true;
             this.game.phase = 'game';
-            console.log("Y");
         }       
     }
     isPointInPath(e){
