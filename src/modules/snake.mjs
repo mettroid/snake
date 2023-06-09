@@ -7,9 +7,8 @@ class Snake extends Sprite{
     upPressed = false;
     trail = [];
     tail = 3;
-    draw(ctx, food, gamer, result){
-        this.checkKey();
-        this.trail.push({x: this.x, y: this.y});
+    draw(ctx, game){
+        this.trail.push({x: this.xtemp, y: this.ytemp});
         if(this.trail.length > this.tail){
             this.trail.shift();
         }
@@ -18,54 +17,54 @@ class Snake extends Sprite{
         for(let i = 0; i < this.trail.length; i++){
             ctx.rect(this.trail[i].x * this.cell, this.trail[i].y * this.cell, this.w, this.h);
             if(this.trail.length < 2) continue; // если у нас пока одна голова , то уходим , не счем её сравнивать
-            if(this.#checkCrashSelf(i, this.trail.length - 1)){
+            if(this.#derectSelfTail(i, this.trail.length - 1)){
                 this.#cutTail();
-                gamer.lives--;
-                console.log(gamer.lives);
+                game.lives--;
+                console.log(game.lives);
             }
         }
-        this.eat(ctx, food, gamer, result);
         ctx.fill();
         ctx.stroke();
     }
-    checkCrashWall(){
-        let head = this.trail[this.trail.length-1];
-        if(head.x < 1 || 
-           head.x > 28 ||
-           head.y < 1 ||
-           head.y > 28){ 
-                return true;
+    detectWall(game){
+        if(this.xtemp < 0 || 
+           this.xtemp > 29 ||
+           this.ytemp < 1 ||
+           this.ytemp > 29){ 
+                game.lives--;
+                this.getStratPosition();
         }
     }
-    #checkCrashSelf(bodyPos, headPos){
+    #derectSelfTail(bodyPos, headPos){
               if(isEqual(this.trail[headPos], this.trail[headPos - 1])) return false; // если координаты головы идентичны координатам шеи змеи
               if(isEqual(this.trail[bodyPos], this.trail[headPos]) && bodyPos !== headPos) return true; // если координаты головы равны координатам любой части тела, кроме самой себя 
               
     }
-    checkKey(){
+    getTempPosition(){
         if(this.rightPressed){
-            this.x += 1;
+            this.xtemp += 1;
         }else if(this.leftPressed){
-            this.x -= 1;
+            this.xtemp -= 1;
         }else if(this.upPressed){
-            this.y -= 1;
+            this.ytemp -= 1;
         }else if(this.downPressed){
-            this.y += 1;
+            this.ytemp += 1;
         }
     }
-    eat(ctx, food, gamer, result){
-        if(isEqual(this.trail[this.trail.length - 1] , food.getPosition())){
-              
+    detectEat(food, game, result){
+        if( this.xtemp === food.x 
+        &&  this.ytemp === food.y ){   
             
-              result.innerHTML = ++gamer.score;
+              result.innerHTML = ++game.score;
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
               this.#addTail();
+              
             }
     }
-    setStratPosition(){
-        this.x = 20;
-        this.y = 20;
+    getStratPosition(){
+        this.xtemp = 20;
+        this.ytemp = 20;
         this.trail.length = 0; 
         this.clearPressed();
         this.upPressed = true;

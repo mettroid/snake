@@ -1,10 +1,34 @@
-class Gamer {
+class Game {
+    start = false;
+    endGame = false;
     score = 0;
     pathButton;
-    constructor(lives){
+    phase;
+    constructor(lives, phase, background){
         this.lives = lives;
+        this.phase = phase;
+        this.background = background;
     }
-    gameOver(c_1){
+    screen_saver(c_1){
+        let x = Math.ceil(c_1.canvas.width / 2);
+        let y = Math.ceil(c_1.canvas.height / 2);
+        let w = 150;
+        let h = 50;
+        c_1.ctx.drawImage(this.background, 0, 0);
+        c_1.ctx.fillStyle = 'red';
+        let path = new Path2D();   // создание пути кнопки для старта 
+        path.rect(x - w/2, y - h/2, w, h);
+        c_1.ctx.fill(path);
+    
+        c_1.ctx.fillStyle = 'black'; // отрисовка текста кнопки
+        c_1.ctx.textAlign = 'center';
+        c_1.ctx.textBaseline = 'middle';
+        c_1.ctx.font = '50px Serif';
+        c_1.ctx.fillText('START', x, y);
+    
+        this.pathButton = path;
+    }    
+    game_over(c_1){
         let x = Math.floor(c_1.canvas.width / 2);
         let y = Math.floor(c_1.canvas.height / 2);
         c_1.ctx.fillStyle = 'red';
@@ -15,7 +39,7 @@ class Gamer {
         c_1.ctx.textAlign = 'center';
         c_1.ctx.textBaseline = 'middle';
         c_1.ctx.fillText('Game Over', x, y);
-    }
+    } 
     winner(c_1){
         let x = Math.floor(c_1.canvas.width / 2);
         let y = Math.floor(c_1.canvas.height / 2);
@@ -35,25 +59,9 @@ class Gamer {
     isWin(){
         return this.score == 6;
     }
-    screenSaver(c_1, img){
-        let x = Math.ceil(c_1.canvas.width / 2);
-        let y = Math.ceil(c_1.canvas.height / 2);
-        let w = 150;
-        let h = 50;
-        c_1.ctx.drawImage(img,0,0);
-        c_1.ctx.fillStyle = 'red';
-        let path = new Path2D();   // создание пути кнопки для старта 
-        path.rect(x - w/2, y - h/2, w, h);
-        c_1.ctx.fill(path);
-    
-        c_1.ctx.fillStyle = 'black'; // отрисовка текста кнопки
-        c_1.ctx.textAlign = 'center';
-        c_1.ctx.textBaseline = 'middle';
-        c_1.ctx.font = '50px Serif';
-        c_1.ctx.fillText('START', x, y);
-    
-        this.pathButton = path;
+    isLoser(){
+        return this.lives == 0;
     }
 
 }
-export { Gamer };
+export { Game };
