@@ -3,5 +3,19 @@
 @import 'style/common.blocks/body/body.scss';
 @import 'style/common.blocks/body/__wrapField/body__wrapField.scss';
 @import 'style/common.blocks/wrapField/wrapField.scss';
-@import 'style/common.blocks/wrapField/__score/wrapField__score.scss';
-@import 'style/common.blocks/wrapField/__result/wrapField__result.scss';
+@import 'style/common.blocks/wrapField/__info/wrapField__info.scss';
+@import 'style/common.blocks/wrapField/__canvas/wrapField__canvas.scss';
+
+@import 'style/common.blocks/info/info.scss';
+
+@import 'style/common.blocks/info/_show/info_show.scss';
+@import 'style/common.blocks/info/__score/info__score.scss';
+@import 'style/common.blocks/info/__result-score/info__result-score.scss';
+
+@import 'style/common.blocks/info/__lives/info__lives.scss';
+@import 'style/common.blocks/info/__result-lives/info__result-lives.scss';
+
+@import 'style/common.blocks/text/text.scss';
+
+@import 'style/common.blocks/canvas/canvas.scss';
+

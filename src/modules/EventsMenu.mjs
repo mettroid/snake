@@ -10,6 +10,8 @@ class EventsMenu {
         if(this.game.start) return;
         if(!this.game.pathButton) return;
         if(this.isPointInPath(e)){
+            let info = document.querySelector('.info');
+            info.classList.add('info_show');
             this.game.start = true;
             this.game.phase = 'game';
         }       

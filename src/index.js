@@ -4,10 +4,12 @@ import background from "./images/back.png";
 import * as Loader from "./modules/loaderPic.mjs";
 import {Canvas} from './modules/canvas.mjs';
 
-let result = document.getElementById('result');
+let scores = document.querySelector('#scores');
+let lives = document.querySelector('#lives');
 let c_1 = new Canvas('basicCanvas', document.querySelector('.wrapField'));
 c_1.create();
 
+let info = document.querySelector('.info');
 let eventsMenu, eventsGame;
 let game;
 let food, snake;
@@ -15,26 +17,21 @@ let food, snake;
 let cells = 30;
 let cellsSize = 20;
 
-let timer = null;
-
 window.onload = function(){
-    console.log('onload');
     start();
 }
-function keyDownHandler(e){
-
-}
 function getTempPosition(){
-    console.log();
     snake.getTempPosition();
 }
 function detection(){
     snake.detectWall(game);
-    snake.detectEat(food, game, result);
+    snake.detectEat(food, game);
 }
 function render(){
     snake.draw(c_1.ctx, game);
     food.draw(c_1.ctx);
+    scores.innerHTML = game.scores;
+    lives.innerHTML = game.lives;
 }
 function startGame(){
             let phase;
@@ -60,13 +57,15 @@ function startGame(){
                                 setTimeout(()=>{
                                     game.phase = 'winner';
                                     game.endgame = true;
-                                }, 500);
+                                    info.classList.remove('info_show');
+                                }, 200);
                             }
                             if(game.isLoser()){
                                 setTimeout(()=>{
                                     game.phase = 'game_over';
                                     game.endgame = true;
-                                }, 500);
+                                    info.classList.remove('info_show');
+                                }, 200);
                             }
                         break;
                         case 'winner':
@@ -91,7 +90,7 @@ async function start(){
         let {Snake} = await import('./modules/snake.mjs');
         let {EventsMenu} = await import('./modules/EventsMenu.mjs');
         let {EventsGame} = await import('./modules/EventsGame.mjs');
-        game = new Game(3, 'screen_saver', img);
+        game = new Game(3, 0,'screen_saver', img);
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
         eventsMenu = new EventsMenu(c_1, game);

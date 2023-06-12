@@ -31,7 +31,7 @@ class Snake extends Sprite{
            this.xtemp > 29 ||
            this.ytemp < 1 ||
            this.ytemp > 29){ 
-                game.lives--;
+                game.decreaseLives();
                 this.getStratPosition();
         }
     }
@@ -51,11 +51,11 @@ class Snake extends Sprite{
             this.ytemp += 1;
         }
     }
-    detectEat(food, game, result){
+    detectEat(food, game){
         if( this.xtemp === food.x 
         &&  this.ytemp === food.y ){   
             
-              result.innerHTML = ++game.score;
+              game.increaseScores();
               food.x = this.random(1, 30);
               food.y = this.random(1, 30);
               this.#addTail();

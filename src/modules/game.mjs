@@ -1,11 +1,13 @@
 class Game {
     start = false;
     endGame = false;
-    score = 0;
+    scores;
+    lives;
     pathButton = null;
     phase;
-    constructor(lives, phase, background){
+    constructor(lives, scores, phase, background){
         this.lives = lives;
+        this.scores = scores;
         this.phase = phase;
         this.background = background;
     }
@@ -56,10 +58,17 @@ class Game {
         c_1.ctx.fillText(`winner - snake`, x, y);
     
         c_1.ctx.textBaseline = 'top';
-        c_1.ctx.fillText(`score: ${this.score}`, x, y);
+        c_1.ctx.fillText(`score: ${this.scores}`, x, y);
+    }
+    increaseScores(){
+        ++this.scores;
+    }
+    decreaseLives(){
+        --this.lives;
     }
     isWin(){
-        return this.score == 6;
+        console.log(this.scores);
+        return this.scores == 6;
     }
     isLoser(){
         return this.lives == 0;
