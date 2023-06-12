@@ -29,7 +29,7 @@ class Snake extends Sprite{
     detectWall(game){
         if(this.xtemp < 0 || 
            this.xtemp > 29 ||
-           this.ytemp < 1 ||
+           this.ytemp < 0 ||
            this.ytemp > 29){ 
                 game.decreaseLives();
                 this.getStratPosition();
