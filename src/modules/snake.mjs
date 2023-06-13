@@ -7,6 +7,8 @@ class Snake extends Sprite{
     upPressed = false;
     trail = [];
     tail = 3;
+    xmov = 1;
+    ymov = 1;
     draw(ctx, game){
         this.trail.push({x: this.xtemp, y: this.ytemp});
         if(this.trail.length > this.tail){
@@ -42,13 +44,14 @@ class Snake extends Sprite{
     }
     getTempPosition(){
         if(this.rightPressed){
-            this.xtemp += 1;
+            this.xtemp +=  this.xmov;
+            console.log(this.xtemp);
         }else if(this.leftPressed){
-            this.xtemp -= 1;
+            this.xtemp -= this.xmov;
         }else if(this.upPressed){
-            this.ytemp -= 1;
+            this.ytemp -= this.ymov;
         }else if(this.downPressed){
-            this.ytemp += 1;
+            this.ytemp += this.ymov;
         }
     }
     detectEat(food, game){

@@ -5,6 +5,7 @@ class EventsGame {
     }
     handleEvent(e){
         if(!this.game.start) return;
+        if(!this.checkKey(e.code)) return;
         this[e.code](e);
         console.log(e.code);
     }
@@ -20,5 +21,8 @@ class EventsGame {
     ArrowDown(){
             this.snake.upPressed || this.snake.clearPressed() && (this.snake.downPressed = true);
     }     
+    checkKey(key){
+        return key.startsWith('Arrow');
+    }
 }
 export {EventsGame}
