@@ -67,8 +67,7 @@ class Game {
         --this.lives;
     }
     isWin(){
-        console.log(this.scores);
-        return this.scores == 6;
+        return this.scores == 16;
     }
     isLoser(){
         return this.lives == 0;

@@ -10,7 +10,7 @@ class Snake extends Sprite{
     xmov = 1;
     ymov = 1;
     draw(ctx, game){
-        this.trail.push({x: this.xtemp, y: this.ytemp});
+       // this.trail.push({x: this.xtemp, y: this.ytemp});
         if(this.trail.length > this.tail){
             this.trail.shift();
         }
@@ -22,7 +22,6 @@ class Snake extends Sprite{
             if(this.#derectSelfTail(i, this.trail.length - 1)){
                 this.#cutTail();
                 game.lives--;
-                console.log(game.lives);
             }
         }
         ctx.fill();
@@ -44,8 +43,7 @@ class Snake extends Sprite{
     }
     getTempPosition(){
         if(this.rightPressed){
-            this.xtemp +=  this.xmov;
-            console.log(this.xtemp);
+            this.xtemp += this.xmov;
         }else if(this.leftPressed){
             this.xtemp -= this.xmov;
         }else if(this.upPressed){
@@ -59,8 +57,6 @@ class Snake extends Sprite{
         &&  this.ytemp === food.y ){   
             
               game.increaseScores();
-              food.x = this.random(1, 30);
-              food.y = this.random(1, 30);
               this.#addTail();
               
             }

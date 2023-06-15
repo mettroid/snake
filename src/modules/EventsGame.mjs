@@ -7,7 +7,6 @@ class EventsGame {
         if(!this.game.start) return;
         if(!this.checkKey(e.code)) return;
         this[e.code](e);
-        console.log(e.code);
     }
     ArrowLeft(){
             this.snake.rightPressed || this.snake.clearPressed() && (this.snake.leftPressed = true);

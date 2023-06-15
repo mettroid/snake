@@ -13,6 +13,7 @@ let info = document.querySelector('.info');
 let eventsMenu, eventsGame;
 let game;
 let food, snake;
+let lastScores;
 
 let cells = 30;
 let cellsSize = 20;
@@ -26,12 +27,16 @@ function getTempPosition(){
 function detection(){
     snake.detectWall(game);
     snake.detectEat(food, game);
+    snake.trail.push({x: snake.xtemp, y: snake.ytemp});
+    if(scores.innerHTML != game.scores){
+        console.log(scores.innerHTML != game.scores);
+        food.detectSnake(snake.trail);
+    }
 }
 function render(){
     snake.draw(c_1.ctx, game);
     food.draw(c_1.ctx);
-    scores.innerHTML = game.scores;
-    lives.innerHTML = game.lives;
+
 }
 function startGame(){
             let phase;
@@ -53,6 +58,8 @@ function startGame(){
                             getTempPosition();
                             detection();
                             render();
+                            scores.innerHTML = game.scores;
+                            lives.innerHTML = game.lives;
                             if(game.isWin()){
                                 setTimeout(()=>{
                                     game.phase = 'winner';
