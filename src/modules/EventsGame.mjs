@@ -4,7 +4,7 @@ class EventsGame {
         this.game = game;
     }
     handleEvent(e){
-        if(!this.game.start) return;
+        if(this.game.phase !== 'game') return;
         if(!this.checkKey(e.code)) return;
         this[e.code](e);
     }

@@ -12,6 +12,9 @@ export default {
     mode,
     target,
     devtool,
+    devServer: {
+      port: 3000,
+    },
     context: path.resolve('src'),
     entry: ['@babel/polyfill', './index.js'],
     output: {

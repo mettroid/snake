@@ -13,7 +13,7 @@ let info = document.querySelector('.info');
 let eventsMenu, eventsGame;
 let game;
 let food, snake;
-let lastScores;
+let btnStart, btnReStart;
 
 let cells = 30;
 let cellsSize = 20;
@@ -52,6 +52,8 @@ function startGame(){
                     switch(phase){
                         case 'screen_saver': 
                             game[phase](c_1);
+                            btnStart.draw(c_1);
+                            
                         break;
                         case 'game':
                             if(game.endgame) break;
@@ -83,7 +85,8 @@ function startGame(){
                         break;
                     }
                     lastUpdate = currentTime;
-            }
+            
+        }
             
             game_loop();
 }
@@ -97,10 +100,12 @@ async function start(){
         let {Snake} = await import('./modules/snake.mjs');
         let {EventsMenu} = await import('./modules/EventsMenu.mjs');
         let {EventsGame} = await import('./modules/EventsGame.mjs');
+        let {Button} = await import('./modules/Button.mjs');
         game = new Game(3, 0,'screen_saver', img);
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
-        eventsMenu = new EventsMenu(c_1, game);
+        btnStart = new Button('btnStart', c_1, 150, 50, 0, 5, 'rgb(250, 4, 4)', 0, 'rgb(250, 4, 4)', '50px Serif', 'START');
+        eventsMenu = new EventsMenu(c_1, game, btnStart);
         eventsGame = new EventsGame(snake, game);
 
         c_1.canvas.addEventListener('click', eventsMenu);
