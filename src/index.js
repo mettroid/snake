@@ -42,11 +42,14 @@ function startGame(){
             let phase;
             let deltaTime = 0;
             let lastUpdate = performance.now();
+            let myReq;
+            
             function game_loop(currentTime){
-                    requestAnimationFrame(game_loop);
+                    myReq = requestAnimationFrame(game_loop);
                     deltaTime = currentTime - lastUpdate;
                     if(deltaTime < 100) return;
 
+                    console.log(myReq);
                     c_1.ctx.clearRect(0, 0, c_1.canvas.width, c_1.canvas.height);
                     phase = game.phase;
                     switch(phase){
@@ -78,17 +81,22 @@ function startGame(){
                             }
                         break;
                         case 'winner':
-                            game[phase](c_1);    
+                            game[phase](c_1); 
+                            btnReStart.draw(c_1);   
                         break;
                         case 'game_over':
                             game[phase](c_1);
+                            btnReStart.draw(c_1);
+                        break;
+                        case 'reload':
+                            cancelAnimationFrame(myReq);
+                            location.reload();
                         break;
                     }
                     lastUpdate = currentTime;
             
-        }
-            
-            game_loop();
+            }     
+            myReq = requestAnimationFrame(game_loop);
 }
 
 async function start(){
@@ -104,8 +112,31 @@ async function start(){
         game = new Game(3, 0,'screen_saver', img);
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
-        btnStart = new Button('btnStart', c_1, 150, 50, 0, 5, 'rgb(250, 4, 4)', 0, 'rgb(250, 4, 4)', '50px Serif', 'START');
-        eventsMenu = new EventsMenu(c_1, game, btnStart);
+        btnStart = new Button({name: 'btnStart', 
+                               c_1: c_1,
+                               w: 150,
+                               h: 50,
+                               offsetY: 3,
+                               radiusRect: 5,
+                               colorBtn: 'rgb(250, 4, 4)',
+                               colorBorder: 'rgb(2,2,2)',
+                               sizeShadow: 0,
+                               colorShadow: 'rgb(250, 4, 4)',
+                               styleText: '50px Serif',
+                               text: 'START'});
+        btnReStart = new Button({name: 'btnReStart',
+                                c_1: c_1,
+                                w: 150,
+                                h: 50,
+                                offsetY: 3,
+                                radiusRect: 10,
+                                colorBtn: 'rgb(104, 104, 104)',
+                                colorBorder: 'rgba(0,0,0,0)',
+                                sizeShadow: 3,
+                                colorShadow: 'rgb(56, 55, 55)',
+                                styleText: '30px Serif',
+                                text: 'RESTART'});
+        eventsMenu = new EventsMenu(c_1, game, btnStart, btnReStart, start);
         eventsGame = new EventsGame(snake, game);
 
         c_1.canvas.addEventListener('mousedown', eventsMenu);

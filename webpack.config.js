@@ -15,6 +15,7 @@ export default {
     devServer: {
       port: 3000,
     },
+    cache: false,
     context: path.resolve('src'),
     entry: ['@babel/polyfill', './index.js'],
     output: {

@@ -4,11 +4,13 @@ class Game {
     scores;
     lives;
     phase;
+    myReq;
     constructor(lives, scores, phase, background){
         this.lives = lives;
         this.scores = scores;
         this.phase = phase;
         this.background = background;
+        this.myReq = this.myReq;
     }
     screen_saver(c_1){
         c_1.ctx.save();
@@ -26,30 +28,7 @@ class Game {
         c_1.ctx.font = '50px serif';
         c_1.ctx.textAlign = 'center';
         c_1.ctx.textBaseline = 'middle';
-        c_1.ctx.fillText('Game Over', x, y - 40);
-
-        let w = 150;
-        let h = 37;
-
-        c_1.ctx.save();
-        c_1.ctx.fillStyle = 'gray';
-        c_1.ctx.lineWidth = 5;
-        c_1.ctx.shadowOffsetX = 2;
-        c_1.ctx.shadowOffsetY = 2;
-        c_1.ctx.shadowBlur = 2;
-        c_1.ctx.shadowColor = "rgb(94, 94, 94)";
-        let path = new Path2D();
-        path.roundRect(x - w / 2, y, w, h, [10]);
-        c_1.ctx.fill(path);
-        c_1.ctx.restore();
-
-        c_1.ctx.save();
-        c_1.ctx.strokeStyle = 'black';
-        c_1.ctx.font = "20px Montserrat";
-        c_1.ctx.textAlign = 'center';
-        c_1.ctx.textBaseline = 'middle';
-        c_1.ctx.strokeText('replay', x, y + 20);
-        c_1.ctx.stroke();
+        c_1.ctx.fillText('Game Over', x, y - 60);
 
     } 
     winner(c_1){
