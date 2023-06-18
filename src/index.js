@@ -108,6 +108,8 @@ async function start(){
         eventsMenu = new EventsMenu(c_1, game, btnStart);
         eventsGame = new EventsGame(snake, game);
 
+        c_1.canvas.addEventListener('mousedown', eventsMenu);
+        c_1.canvas.addEventListener('mouseup', eventsMenu);
         c_1.canvas.addEventListener('click', eventsMenu);
         document.addEventListener('keydown', eventsGame);
 
