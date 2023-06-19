@@ -1,6 +1,6 @@
 class Button {
     name;
-    constructor({name, c_1, w, h, offsetY, radiusRect, colorBtn, colorBorder, sizeShadow, colorShadow, styleText, text}){
+    constructor(c_1, {name, w, h, offsetY, radiusRect, colorBtn, colorBorder, sizeShadow, colorShadow, styleText, text}){
         this.xCenter = Math.ceil(c_1.canvas.width / 2);
         this.yCenter = Math.ceil(c_1.canvas.height / 2);
         this.name = name;

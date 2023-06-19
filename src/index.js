@@ -2,7 +2,8 @@ import "./index.html";
 import "./index.scss";
 import background from "./images/back.png";
 import * as Loader from "./modules/loaderPic.mjs";
-import {Canvas} from './modules/canvas.mjs';
+import { Canvas } from './modules/Sanvas.mjs';
+import { buttonsSettings } from "./modules/ButtonsSettings.mjs";
 
 let scores = document.querySelector('#scores');
 let lives = document.querySelector('#lives');
@@ -104,38 +105,16 @@ async function start(){
     try{
         let img = await Loader.loadImage(background);
         let {Game} = await import('./modules/Game.mjs');
-        let {Food} = await import('./modules/food.mjs');
-        let {Snake} = await import('./modules/snake.mjs');
+        let {Food} = await import('./modules/Food.mjs');
+        let {Snake} = await import('./modules/Snake.mjs');
         let {EventsMenu} = await import('./modules/EventsMenu.mjs');
         let {EventsGame} = await import('./modules/EventsGame.mjs');
         let {Button} = await import('./modules/Button.mjs');
         game = new Game(3, 0,'screen_saver', img);
         food = new Food(15, 15, cellsSize, cellsSize, 'lime');
         snake = new Snake(20, 20, cellsSize, cellsSize, 'red');
-        btnStart = new Button({name: 'btnStart', 
-                               c_1: c_1,
-                               w: 150,
-                               h: 50,
-                               offsetY: 3,
-                               radiusRect: 5,
-                               colorBtn: 'rgb(250, 4, 4)',
-                               colorBorder: 'rgb(2,2,2)',
-                               sizeShadow: 0,
-                               colorShadow: 'rgb(250, 4, 4)',
-                               styleText: '50px Serif',
-                               text: 'START'});
-        btnReStart = new Button({name: 'btnReStart',
-                                c_1: c_1,
-                                w: 150,
-                                h: 50,
-                                offsetY: 3,
-                                radiusRect: 10,
-                                colorBtn: 'rgb(104, 104, 104)',
-                                colorBorder: 'rgba(0,0,0,0)',
-                                sizeShadow: 3,
-                                colorShadow: 'rgb(56, 55, 55)',
-                                styleText: '30px Serif',
-                                text: 'RESTART'});
+        btnStart = new Button(c_1, buttonsSettings.btnStart);
+        btnReStart = new Button(c_1, buttonsSettings.btnReStart);
         eventsMenu = new EventsMenu(c_1, game, btnStart, btnReStart, start);
         eventsGame = new EventsGame(snake, game);
 

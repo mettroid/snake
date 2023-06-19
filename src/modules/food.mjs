@@ -1,4 +1,4 @@
-import {Sprite} from './sprite.mjs'
+import {Sprite} from './Sprite.mjs'
 import {isEqual} from 'lodash';
 class Food extends Sprite{
     draw(ctx){
