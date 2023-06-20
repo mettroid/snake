@@ -41,11 +41,11 @@ class Game {
         c_1.ctx.font = '50px comic';
         c_1.ctx.textAlign = 'center';
     
-        c_1.ctx.textBaseline = 'bottom';
-        c_1.ctx.fillText(`winner - snake`, x, y);
+        c_1.ctx.textBaseline = 'alphabetic';
+        c_1.ctx.fillText(`winner - snake`, x, y - 90);
     
         c_1.ctx.textBaseline = 'top';
-        c_1.ctx.fillText(`score: ${this.scores}`, x, y);
+        c_1.ctx.fillText(`score:${this.scores}`, x, y - 80);
     }
     increaseScores(){
         ++this.scores;
@@ -54,7 +54,7 @@ class Game {
         --this.lives;
     }
     isWin(){
-        return this.scores == 16;
+        return this.scores == 1;
     }
     isLoser(){
         return this.lives == 0;
