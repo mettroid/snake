@@ -1,6 +1,6 @@
 class Button {
     name;
-    constructor(c_1, {name, w, h, offsetY, radiusRect, colorBtn, colorBorder, sizeShadow, colorShadow, styleText, text}){
+    constructor(c_1, {name, w, h, offsetY, radiusRect, colorBtn, colorBorder, sizeShadow, colorShadow, textSize, text}){
         this.xCenter = Math.ceil(c_1.canvas.width / 2);
         this.yCenter = Math.ceil(c_1.canvas.height / 2);
         this.name = name;
@@ -12,7 +12,7 @@ class Button {
         this.colorBorder = colorBorder;
         this.sizeShadow = sizeShadow;
         this.colorShadow = colorShadow;
-        this.styleText = styleText;    
+        this.textSize = textSize;    
         this.text = text;
     }
     draw(c_1){
@@ -40,7 +40,7 @@ class Button {
 
         c_1.ctx.textAlign = 'center';
         c_1.ctx.textBaseline = 'middle';
-        c_1.ctx.font = this.styleText;
+        c_1.ctx.font = this.textSize + 'px Serif';
         c_1.ctx.fillText(this.text, this.xCenter, this.yCenter + this.offsetY, this.w - 5); 
 
         c_1.ctx.restore();

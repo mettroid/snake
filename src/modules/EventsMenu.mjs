@@ -52,7 +52,8 @@ class EventsMenu {
                     changes: [
                                 [
                                    { prop: "w", to: 180, ms: 200 },
-                                   { prop: "h", to: 40, ms: 200 }
+                                   { prop: "h", to: 40, ms: 200 },
+                                   { prop: "textSize", to: 40, ms: 200 }
                                 ],
                                         
                     ]
@@ -68,7 +69,8 @@ class EventsMenu {
                 changes: [
                     [
                         { prop: "w", to: 150, ms: 200 },
-                        { prop: "h", to: 50, ms: 200 }
+                        { prop: "h", to: 50, ms: 200 },
+                        { prop: "textSize", to: 50, ms: 200 }
                     ]
                 ]
             });
@@ -76,7 +78,8 @@ class EventsMenu {
         }
     }
     getDetect(e, etemp){
-        if(e.button !== 0) return;
+        if( e.button !== 0 ) return;
+        if( this.game.phase === 'game' ) return;
         let currBtn = this.defineButton();
         let { x, y } = Mouse.coords(this.c_1.canvas, e);
         if( x > this[currBtn].xCenter - this[currBtn].w / 2 

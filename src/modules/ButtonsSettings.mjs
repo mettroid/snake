@@ -8,7 +8,7 @@ const buttonsSettings = {
                                         colorBorder: 'rgb(2,2,2)',
                                         sizeShadow: 0,
                                         colorShadow: 'rgb(250, 4, 4)',
-                                        styleText: '50px Serif',
+                                        textSize: 50,
                                         text: 'START' 
                             },
                             btnReStart: { name: 'btnReStart',
@@ -20,7 +20,7 @@ const buttonsSettings = {
                                           colorBorder: 'rgba(0,0,0,0)',
                                           sizeShadow: 3,
                                           colorShadow: 'rgb(56, 59, 55)',
-                                          styleText: '30px Serif',
+                                          textSize: 30,
                                           text: 'RESTART'}
 };
 export { buttonsSettings }
