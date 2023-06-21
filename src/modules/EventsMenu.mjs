@@ -2,12 +2,14 @@ import * as Mouse from './Mouse.mjs';
 class EventsMenu {
     event_1 = false;
     event_2 = false;
-    constructor(c_1, game, btnStart, btnReStart, start){
+    event_3 = false;
+    halfAnim = false;
+    constructor(c_1, game, btnStart, btnReStart, animate){
         this.c_1 = c_1;
         this.game = game;  
         this.btnStart = btnStart;  
         this.btnReStart = btnReStart;  
-        this.start = start;
+        this.animate = animate;
     }
     handleEvent(e){
         this[e.type](e);
@@ -38,6 +40,40 @@ class EventsMenu {
     }
     mouseup(e){
         this.getDetect(e, 'event_2');
+    }    
+    mousemove(e){
+        this.getDetect(e, 'event_3');
+        if(this.event_3){
+            if(this.halfAnim) return;
+            let currBtn = this.defineButton();
+            this.animate.addAnimation(
+                {
+                    obj: this[currBtn],
+                    changes: [
+                                [
+                                   { prop: "w", to: 180, ms: 200 },
+                                   { prop: "h", to: 40, ms: 200 }
+                                ],
+                                        
+                    ]
+                }
+
+            );
+            this.halfAnim = true;
+        } else {
+            if(!this.halfAnim) return;
+            let currBtn = this.defineButton();
+            this.animate.addAnimation({
+                obj: this[currBtn],
+                changes: [
+                    [
+                        { prop: "w", to: 150, ms: 200 },
+                        { prop: "h", to: 50, ms: 200 }
+                    ]
+                ]
+            });
+            this.halfAnim = false;
+        }
     }
     getDetect(e, etemp){
         if(e.button !== 0) return;
@@ -51,7 +87,8 @@ class EventsMenu {
         } else {
             this[etemp] = false;
         }
-    }
+    }    
+
     defineButton(){
         switch(this.game.phase){
             case 'screen_saver':
@@ -66,5 +103,6 @@ class EventsMenu {
             break;
         }        
     }
+
 }
 export {EventsMenu}
